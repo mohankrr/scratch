@@ -1,0 +1,124 @@
+<!Doctype html>
+<html>
+<head>
+<script src="gamecontroller.js"></script>
+<style>
+html, body, canvas {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+/* globals GameController */
+
+(function(){
+  'use strict';
+
+  var canvas = document.getElementsByTagName('canvas')[0];
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener(resize);
+  window.addEventListener("orientationchange",resize);
+
+  resize();
+
+  GameController.init({
+    left: {
+      type: 'dpad',
+      position: {left: '15%', bottom: '50%'},
+    /*  joystick: {
+        touchStart: function(){
+          console.log('touch starts');
+        },
+        touchEnd: function(){
+          console.log('touch ends');
+        },
+        touchMove: function(details){
+            console.log("dx : " +  details.dx );
+            console.log("dy : " + details.dy );
+            console.log("max :"  +  details.max );
+            console.log("normalizedX : " +  details.normalizedX );
+            console.log("normalizedY : " +  details.normalizedY );
+        }
+      },*/
+      dpad: {
+        up: { width: '50%', height: '10%',
+          touchStart: function(){
+              console.log('up pressed');
+            },
+        touchEnd: function(){
+          console.log('up ends');
+            }
+        },
+        down: { width: '50%', height: '10%',
+          touchStart: function(){
+              console.log('down pressed');
+            },
+        touchEnd: function(){
+          console.log('down ends');
+            }
+        },
+        left: { width: '50%', height: '10%',
+          touchStart: function(){
+              console.log('left pressed');
+            },
+        touchEnd: function(){
+          console.log('left ends');
+            }
+         },
+        right: { width: '50%', height: '10%',
+          touchStart: function(){
+              console.log('right pressed');
+            },
+        touchEnd: function(){
+          console.log('right ends');
+            }
+         }
+      }
+    },
+    right: {
+      position: {right: '25%', top: '45%'},
+      type: 'buttons',
+      buttons: [{
+          label: 'X',
+          fontSize: 23,
+          touchStart: function(){
+            console.log('X start');
+          }
+        }, {
+          label: 'Y',
+          fontSize: 23,
+          touchStart: function(){
+            console.log('Y start');
+          }
+        }, {
+          label: 'A',
+          fontSize: 23,
+          touchStart: function(){
+            console.log('A start');
+          }
+        }, {
+          label: 'B',
+          fontSize: 23,
+          touchStart: function(){
+            console.log('B start');
+          }
+        },
+        false,
+        false
+      ]
+    }
+  });
+})();
+</script>
+</body>
+</html>

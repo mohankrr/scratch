@@ -2,7 +2,7 @@
 <html>
   <meta charset="utf-8">
   <head>
-    <title>Socket.IO chat</title>
+    <title>Virtual Joy Stick</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -20,34 +20,34 @@
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script type="text/javascript">
-    var robot;
+    var vjs;
 
     window.onload = function() {
-      // We connect to the 'chappie' robot using its namespace(nsp)
-      robot = io('http://127.0.0.1:3000/api/robots/vjoy');
+      // Connect to the 'chappie' vjs using its namespace(nsp)
+      vjs = io('http://127.0.0.1:3000/api/robots/vjoy');
 
       // Listen to the 'message' event on the robot
-      robot.on('message', function(msg) {
+      vjs.on('message', function(msg) {
         $('#messages').append($('<li>').text(msg));
       });
 
-      // Listen for robot specific events, this must be declared
+      // Listen for vjs specific events, this must be declared
       // when defining a robot in cylon
-      robot.on('turned_on', function(){
-        console.log('The robot "vjoy" just turned ON its led!!!');
+      vjs.on('turned_on', function(){
+        console.log('The vjs "vjoy" just turned ON its led!!!');
       });
 
-      robot.on('turned_off', function(){
-        console.log('The robot "vjoy" just turned OFF its led!!!');
+      vjs.on('turned_off', function(){
+        console.log('The vjs "vjoy" just turned OFF its led!!!');
       });
 
       
-      msg = 'You have been subscribed to Cylon sockets:' + robot.nsp;
+      msg = 'You have been subscribed to Cylon sockets:' + vjs.nsp;
 
       $('#messages').append($('<li>').text(msg));
 
       $('form').submit(function(){
-        robot.emit($('#m').val());
+        vjs.emit($('#m').val());
         
         console.log("Commad - " + $('#m').val())
         $('#m').val('');
